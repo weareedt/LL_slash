@@ -1,0 +1,21 @@
+{
+	"folders": [
+		{
+			"name": "LL_Slash",
+			"path": "."
+		},
+		{
+			"name": "UE5",
+			"path": "D:\\_unrealinstall\\UE_5.1\\UE_5.1"
+		}
+	],
+	"settings": {
+		"typescript.tsc.autoDetect": "off"
+	},
+	"extensions": {
+		"recommendations": [
+			"ms-vscode.cpptools",
+			"ms-dotnettools.csharp"
+		]
+	}
+}
