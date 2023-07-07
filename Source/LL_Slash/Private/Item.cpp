@@ -18,19 +18,6 @@ AItem::AItem()
 void AItem::BeginPlay()
 {
 	Super::BeginPlay();
-
-	UWorld* World = GetWorld();
-	
-	SetActorLocation(FVector(0.f,0.f,50.f));
-	SetActorRotation(FRotator(0.f,0.f,50.f));
-	FVector Location = GetActorLocation();
-	FVector Forward = GetActorForwardVector();
-	
-	//Macro for Debug
-	DRAWDEBUGSPHERE(Location)
-	//DRAWDEBUGLINE(Location, Location + Forward * 100.f)
-	//DRAWDEBUGPOINT(Location +Forward *100.f )
-	DRAWDEBUGVECTOR(Location, Location + Forward * 100.f)
 	
 }
 
@@ -38,6 +25,14 @@ void AItem::BeginPlay()
 void AItem::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+
+	float MovementRate = 50.f;
+	float RotationRate = 45.f;
+
+	AddActorWorldOffset(FVector(MovementRate * DeltaTime,0.f,0.f));
+	AddActorWorldRotation(FRotator(0.f,RotationRate *DeltaTime,0.f));
+	DRAWDEBUGSPHERE_Update(GetActorLocation());
+	DRAWDEBUGVECTOR_singleframe(GetActorLocation(), GetActorLocation() + GetActorForwardVector() * 100.f);
 
 }
 
