@@ -19,16 +19,37 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-private:
-	
-	UPROPERTY(VisibleAnywhere)
+	UPROPERTY(VisibleAnywhere, BlueprintReadonly)
 	float RunningTime;
 
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Sine Parameter")
 	float Amplitude = 0.25f;
 
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Sine Parameter")
 	float TimeConstant = 5.f;
+
+	//expose function to blueprint
+	UFUNCTION(BlueprintPure)
+	float TransformedSin();
+
+	UFUNCTION(BlueprintPure)
+	float TransformedCos();
+
+	template<typename T>
+	T Avg(T First, T second);
+
+
+private:
+
+	UPROPERTY(VisibleAnywhere)
+	UStaticMeshComponent* ItemMesh; 
+	
 
 	
 };
+
+template <typename T>
+inline T AItem::Avg(T First, T second)
+{
+    return T(First + second) / 2;
+}
