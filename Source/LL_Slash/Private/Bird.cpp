@@ -31,7 +31,12 @@ ABird::ABird()
 void ABird::BeginPlay()
 {
 	Super::BeginPlay();
-	
+
+	APlayerController*PlayerController = Cast<APlayerController>(GetController());
+	if(PlayerController)
+	{
+		
+	}
 }
 
 void ABird::MoveForward(float Value)
