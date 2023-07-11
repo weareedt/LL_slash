@@ -23,20 +23,12 @@ ABird::ABird()
 
 	AutoPossessPlayer = EAutoReceiveInput::Player0;
 
-
-
 }
 
 // Called when the game starts or when spawned
 void ABird::BeginPlay()
 {
 	Super::BeginPlay();
-
-	APlayerController*PlayerController = Cast<APlayerController>(GetController());
-	if(PlayerController)
-	{
-		
-	}
 }
 
 void ABird::MoveForward(float Value)

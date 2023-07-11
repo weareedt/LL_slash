@@ -8,7 +8,6 @@
 
 class UCapsuleComponent;
 class USkeletalMeshComponent;
-class UInputMappingContext;
 
 UCLASS()
 class LL_SLASH_API ABird : public APawn
@@ -31,9 +30,6 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 	void MoveForward(float Value);
-
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category =Input)
-	UInputMappingContext* BirdMappingContext;
 
 private:
 	UPROPERTY(VisibleAnywhere)
