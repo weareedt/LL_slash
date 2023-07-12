@@ -31,9 +31,21 @@ protected:
 	UInputAction* MovementAction;
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input)
 	UInputAction* LookAction;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input)
+	UInputAction* JumpAction;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input)
+	UInputAction* EkeyPressedAction;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input)
+	UInputAction* AttackAction;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input)
+	UInputAction* DodgeAction;
 
+	//Callback for input
 	void Move(const FInputActionValue& Value);
 	void Look(const FInputActionValue& Value);
+	//void EKeyPressed();
+	//void Attack();
+	//void Dodge();
 
 
 public:	
