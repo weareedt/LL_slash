@@ -27,5 +27,7 @@ void USlashAnimInstance::NativeUpdateAnimation(float DeltaTime)
     {
         GroundSpeedMove = UKismetMathLibrary::VSizeXY(SlashCharacterMovement->Velocity);
         isFalling = SlashCharacterMovement->IsFalling();
+        CharacterState = SlashCharacter->GetCharacterState();
+
     }
 }
