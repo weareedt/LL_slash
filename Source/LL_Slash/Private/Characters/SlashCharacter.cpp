@@ -8,6 +8,8 @@
 #include "GameFramework/SpringArmComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "Camera/CameraComponent.h"
+#include "Item.h"
+#include "Weapon/Weapon.h"
 
 // Sets default values
 ASlashCharacter::ASlashCharacter()
@@ -72,6 +74,17 @@ void ASlashCharacter::Look(const FInputActionValue &Value)
 
 
 }
+
+void ASlashCharacter::EKeyPressed()
+{
+	AWeapon* OverlappingWeapon = Cast<AWeapon>(OverlappingItem);
+	if (OverlappingWeapon)
+	{
+		OverlappingWeapon->Equip(GetMesh(), FName("hand_rSocket"));
+	}
+	
+}
+
 // Called every frame
 void ASlashCharacter::Tick(float DeltaTime)
 {
@@ -90,7 +103,7 @@ void ASlashCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComp
 		EnhancedInputComponent->BindAction(MovementAction, ETriggerEvent::Triggered, this,&ASlashCharacter::Move);
 		EnhancedInputComponent->BindAction(LookAction, ETriggerEvent::Triggered, this,&ASlashCharacter::Look);
 		EnhancedInputComponent->BindAction(JumpAction, ETriggerEvent::Triggered, this,&ASlashCharacter::Jump);
-		//EnhancedInputComponent->BindAction(EkeyPressedAction, ETriggerEvent::Triggered, this,&ASlashCharacter::EKeyPressed);
+		EnhancedInputComponent->BindAction(EkeyPressedAction, ETriggerEvent::Triggered, this,&ASlashCharacter::EKeyPressed);
 		//EnhancedInputComponent->BindAction(AttackAction, ETriggerEvent::Triggered, this,&ASlashCharacter::Attack);
 		//EnhancedInputComponent->BindAction(DodgeAction, ETriggerEvent::Triggered, this,&ASlashCharacter::Dodge);
 	}

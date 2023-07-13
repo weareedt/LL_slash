@@ -4,6 +4,7 @@
 #include "Item.h"
 #include "LL_Slash/DebugMacro.h"
 #include "Components/SphereComponent.h"
+#include "Characters/SlashCharacter.h"
 
 
 
@@ -29,17 +30,33 @@ void AItem::BeginPlay()
 	Avg<int32>(1,3);
 
 	Sphere->OnComponentBeginOverlap.AddDynamic(this, &AItem::OnSphereOverlap);
+	Sphere->OnComponentEndOverlap.AddDynamic(this, &AItem::OnSphereEndOverlap);
 	
 }
 
-void AItem::OnSphereOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
+void AItem::OnSphereOverlap
+(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
-	const FString OtherActorName = OtherActor->GetName();
-	if (GEngine)
+	
+	ASlashCharacter* SlashCharacter = Cast<ASlashCharacter>(OtherActor);
+	if (SlashCharacter)
 	{
-		GEngine->AddOnScreenDebugMessage(1, 30.f, FColor::Red, OtherActorName);
+		SlashCharacter->SetOverlappingItem(this);
 	}
 }
+
+void AItem::OnSphereEndOverlap
+(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
+{
+	ASlashCharacter* SlashCharacter = Cast<ASlashCharacter>(OtherActor);
+	if (SlashCharacter)
+	{
+		SlashCharacter->SetOverlappingItem(nullptr);
+	}
+}
+
+
+
 
 float AItem::TransformedSin()
 {
@@ -57,8 +74,8 @@ void AItem::Tick(float DeltaTime)
 	RunningTime += DeltaTime;
 
 	//draw debug sphere and vector
-	DRAWDEBUGSPHERE_Update(GetActorLocation())
-	DRAWDEBUGVECTOR_singleframe(GetActorLocation(), GetActorLocation() + GetActorForwardVector() * 100)
+	//DRAWDEBUGSPHERE_Update(GetActorLocation())
+	//DRAWDEBUGVECTOR_singleframe(GetActorLocation(), GetActorLocation() + GetActorForwardVector() * 100)
 
 }
 

@@ -11,6 +11,7 @@ class UInputMappingContext;
 class UInputAction;
 class USpringArmComponent;
 class UCameraComponent;
+class AItem;
 
 UCLASS()
 class LL_SLASH_API ASlashCharacter : public ACharacter
@@ -43,7 +44,7 @@ protected:
 	//Callback for input
 	void Move(const FInputActionValue& Value);
 	void Look(const FInputActionValue& Value);
-	//void EKeyPressed();
+	void EKeyPressed();
 	//void Attack();
 	//void Dodge();
 
@@ -55,6 +56,8 @@ public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
+
+
 private:
 
 	UPROPERTY(VisibleAnywhere)
@@ -62,5 +65,11 @@ private:
 
 	UPROPERTY(VisibleAnywhere)
 	UCameraComponent* ViewCamera;
+
+	UPROPERTY(VisibleInstanceOnly)
+	AItem* OverlappingItem;
+
+public:
+	FORCEINLINE void SetOverlappingItem(AItem* Item) { OverlappingItem = Item; }
 
 };

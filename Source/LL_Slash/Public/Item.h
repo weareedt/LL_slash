@@ -6,6 +6,7 @@
 #include "GameFramework/Actor.h"
 #include "Item.generated.h"
 
+
 class USphereComponent;
 
 
@@ -42,13 +43,18 @@ protected:
 	T Avg(T First, T second);
 
 	UFUNCTION()
-	void OnSphereOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
+	virtual void OnSphereOverlap
+	(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
 
+	UFUNCTION()
+	virtual void OnSphereEndOverlap
+	(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	UStaticMeshComponent* ItemMesh; 
 
 private:
 
-	UPROPERTY(VisibleAnywhere)
-	UStaticMeshComponent* ItemMesh; 
 
 	UPROPERTY(VisibleAnywhere)
 	USphereComponent* Sphere;
@@ -57,9 +63,8 @@ private:
 
 
 	
-};
-
-template <typename T>
+}
+;template <typename T>
 inline T AItem::Avg(T First, T second)
 {
     return T(First + second) / 2;
